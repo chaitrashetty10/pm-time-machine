@@ -178,7 +178,8 @@ async function coach() {
     if (!apiKey) {
         apiKey = prompt("Enter your Groq API key to use the live AI Coach:");
         if (apiKey) {
-            localStorage.setItem("groq_api_key", apiKey.trim());
+            apiKey = apiKey.trim();
+            localStorage.setItem("groq_api_key", apiKey);
         } else {
             el.textContent = "API key required to run the AI coach.";
             return;
@@ -197,19 +198,22 @@ async function coach() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "llama3-8b-8192",
+                model: "llama-3.3-70b-versatile",
                 messages: [{ role: "user", content: promptText }]
             })
         });
 
         let data = await response.json();
-        if (data.choices && data.choices.length > 0) {
+
+        if (response.ok && data.choices && data.choices.length > 0) {
             el.innerHTML = esc(data.choices[0].message.content) + '<br><br><button class="go ghost" style="padding:4px 10px;font-size:12px" onclick="localStorage.removeItem(\'groq_api_key\');coach()">Change API Key</button>';
         } else {
-            el.textContent = "Error receiving response. Please verify your API key.";
+            // Show exact error message from Groq API
+            var errMessage = (data.error && data.error.message) ? data.error.message : "Invalid request or API key.";
+            el.innerHTML = "<b>Groq Error:</b> " + esc(errMessage) + '<br><br><button class="go ghost" style="padding:4px 10px;font-size:12px" onclick="localStorage.removeItem(\'groq_api_key\');coach()">Reset Key</button>';
         }
     } catch (err) {
-        el.textContent = "Could not connect to AI coach. Check your key or internet connection.";
+        el.innerHTML = "Could not connect to AI coach.<br><br><button class="go ghost" style="padding:4px 10px;font-size:12px" onclick="localStorage.removeItem(\'groq_api_key\');coach()">Reset Key</button>";
     }
 }
 
