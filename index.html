@@ -2,118 +2,143 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#14171f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PM Time Machine">
 <title>PM Time Machine: practice real product decisions</title>
+<meta name="description" content="A free simulator for learning product management. Play the product manager at a turning point in tech history, make two hard decisions, and see the trade-offs. No sign-up.">
 <style>
-:root{--bg:#f4f1ea;--fg:#14171f;--mut:#5a5f68;--card:#fff;--line:#ddd8cc;--acc:#a85d00;--btn:#14171f;--btnfg:#f4f1ea;--good:#1b7f5c;--bad:#b3392b;--hero:#14171f;--herofg:#f4f1ea}
+:root{--bg:#f4f1ea;--fg:#14171f;--mut:#5a5f68;--card:#fff;--line:#ddd8cc;--acc:#a85d00;--btn:#14171f;--btnfg:#f4f1ea;--good:#1b7f5c;--bad:#b3392b;--hero:#14171f;--herofg:#f4f1ea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171f;--fg:#f4f1ea;--mut:#b8bcc6;--card:#1f2430;--line:#333a4a;--acc:#f2a33a;--btn:#f2a33a;--btnfg:#14171f;--good:#4fc9a0;--bad:#ff8a7a;--hero:#1f2430;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14171f;--fg:#f4f1ea;--mut:#b8bcc6;--card:#1f2430;--line:#333a4a;--acc:#f2a33a;--btn:#f2a33a;--btnfg:#14171f;--good:#4fc9a0;--bad:#ff8a7a;--hero:#1f2430;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
-header{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto;padding:16px 20px;position:sticky;top:0;background:var(--bg);z-index:20;border-bottom:1px solid var(--line)}
-main{max-width:560px;margin:0 auto;padding:14px 20px 84px}
-.ib{width:42px;height:42px;border-radius:50%;border:0;background:var(--card);color:var(--fg);font-size:20px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
-.ttl{font-family:Georgia,serif;font-weight:700;font-size:18px;cursor:pointer}
-.card,.how div,.g,.opt,.sc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
-.hero{background:linear-gradient(135deg,#1c2233,#2d2447);color:#f4f1ea;border-radius:24px;padding:36px 28px;margin:8px 0 20px}
-.go{background:var(--btn);color:var(--btnfg);border:0;border-radius:14px;padding:14px 22px;font-weight:700;font-size:16px;cursor:pointer;margin:8px 8px 0 0}
-.ghost{background:transparent;color:var(--fg);border:2px solid var(--line)}
+header{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto;padding:16px 20px}
+.logo{font-family:Georgia,serif;font-weight:700;font-size:20px;cursor:pointer;background:none;border:0;color:var(--fg)}
+main{max-width:900px;margin:0 auto;padding:4px 20px 56px;animation:in .3s}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tag{font-size:12px;font-weight:700;letter-spacing:3px;color:var(--acc);text-transform:uppercase}
+h1,h2{font-family:Georgia,serif;line-height:1.15;margin:8px 0 12px}h1{font-size:42px}h2{font-size:30px}
+p{margin:0 0 14px}.mut{color:var(--mut)}button{font:inherit;cursor:pointer}
+.hero{background:var(--hero);color:var(--herofg);border-radius:20px;padding:36px 28px;margin:8px 0 20px}
+.hero p{font-size:19px;max-width:620px}.hero .tag{color:#f2a33a}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.how div,.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.card{margin:12px 0}.how b{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:12px 0}
+.sc{text-align:left;background:var(--card);color:var(--fg);border:2px solid var(--line);border-radius:16px;padding:18px}
+.sc:hover,.sc:focus-visible,.opt:hover,.opt:focus-visible{border-color:var(--acc);outline:none}
+.sc .ic{font-size:32px}.sc b{display:block;font-size:18px;margin:6px 0 2px}.sc small{color:var(--mut)}
+.pr{height:6px;border-radius:6px;background:var(--line);margin-top:12px;overflow:hidden}.pr i{display:block;height:100%;background:var(--acc)}
+.stp{display:flex;gap:6px;margin:6px 0}.stp span{flex:1;height:6px;border-radius:6px;background:var(--line)}.stp .done{background:var(--acc)}.stp .cur{background:var(--fg)}
+.step{font-size:13px;color:var(--mut);margin-bottom:10px}
 .gauges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
-.g{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
-.gv{font-size:26px;font-weight:700;margin:2px 0 6px}
-.track{height:8px;border-radius:8px;background:var(--line);overflow:hidden}
-.fill{height:100%;background:var(--acc)}
-.opt{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;color:var(--fg);border:2px solid var(--line);border-radius:14px;padding:16px 18px;margin:10px 0;background:var(--card);cursor:pointer}
+.g{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}.gl{font-size:13px;color:var(--mut)}
+.gv{font-size:26px;font-weight:700;margin:2px 0 6px}.track{height:8px;border-radius:8px;background:var(--line);overflow:hidden}.fill{height:100%;background:var(--acc);transition:width .6s}
+.pill{font-size:12px;margin-left:8px;padding:2px 8px;border-radius:20px;border:1px solid currentColor}.up{color:var(--good)}.dn{color:var(--bad)}
+.opt{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;background:var(--card);color:var(--fg);border:2px solid var(--line);border-radius:14px;padding:16px 18px;margin:10px 0}
 .opt i{flex:none;width:34px;height:34px;border-radius:50%;background:var(--btn);color:var(--btnfg);font-style:normal;font-weight:700;display:grid;place-items:center}
-#tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line)}
-#tabs .in{display:flex;max-width:560px;margin:0 auto}
-#tabs button{flex:1;background:none;border:0;padding:8px 2px 10px;color:var(--mut);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
-#tabs button span{font-size:22px}#tabs button.on{color:var(--acc);font-weight:700}
-.mut{color:var(--mut)}
-</style></head>
-<body>
-<header>
-  <button id="bk" class="ib" onclick="tab('cases')" style="display:none">←</button>
-  <span id="ttl" class="ttl" onclick="tab('home')">⏳ PM Time Machine</span>
-  <button class="ib" onclick="document.documentElement.toggleAttribute('data-theme')">◐</button>
-</header>
+.opt b{display:block;font-size:18px}
+.go{background:var(--btn);color:var(--btnfg);border:0;border-radius:12px;padding:14px 22px;font-weight:700;font-size:16px;margin:8px 8px 0 0}
+.ghost{background:transparent;color:var(--fg);border:2px solid var(--line)}
+.row{display:flex;flex-wrap:wrap}.badge{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:20px;padding:3px 10px;color:var(--mut);margin:0 6px 6px 0}
+.big{font-size:56px;font-weight:700;font-family:Georgia,serif}.note{font-size:13px;color:var(--mut);margin-top:28px}
+@media(max-width:560px){h1{font-size:32px}.gauges{grid-template-columns:1fr}}
+
+body{-webkit-tap-highlight-color:transparent;overscroll-behavior-y:none;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{position:sticky;top:0;z-index:20;background:var(--bg);max-width:560px;padding:10px 14px;border-bottom:1px solid var(--line);gap:8px}
+main{max-width:560px;min-height:calc(100vh - 140px)}
+.ib{width:42px;height:42px;border-radius:50%;border:0;background:var(--card);color:var(--fg);font-size:20px;box-shadow:0 1px 3px rgba(0,0,0,.12);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.ttl{flex:1;font-family:Georgia,serif;font-weight:700;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none}
+#tabs .in{display:flex;max-width:560px;margin:0 auto;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+#tabs button{flex:1;background:none;border:0;padding:8px 2px 10px;color:var(--mut);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:56px}
+#tabs button span{font-size:22px;line-height:1}#tabs button.on{color:var(--acc);font-weight:700}
+.card,.how div,.g,.opt,.sc,.fc{border-radius:18px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(0,0,0,.05)}
+.hero{border-radius:24px;background:linear-gradient(135deg,#1c2233,#2d2447);color:#f4f1ea}
+.go{border-radius:14px;min-height:50px}.opt,.sc{min-height:56px}
+.go:active,.opt:active,.sc:active,.fc:active{transform:scale(.98)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.tiles div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 8px;text-align:center;font-size:12px;color:var(--mut)}
+.tiles b{display:block;font-size:26px;color:var(--fg);font-family:Georgia,serif}
+.sh{font-size:20px;margin:22px 0 8px}
+.hs{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px;margin:0 -4px}
+.hs>div,.fc{flex:0 0 78%;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);padding:16px;font-size:15px}
+.hs>div{border-radius:18px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(0,0,0,.05)}.hs>div b{display:block;margin-bottom:4px}
+.fc{text-align:left;color:var(--fg);display:flex;flex-direction:column;gap:2px;flex-basis:62%}.fc .ic{font-size:30px}.fc small{color:var(--mut)}
+.sc{display:flex;align-items:center;gap:14px;width:100%;margin:8px 0;padding:12px 14px;text-align:left}
+.sc .ic{font-size:30px;width:44px;text-align:center;flex:none}.sc .tx{flex:1;min-width:0}.sc .tx b{margin:0}.sc .chev{color:var(--mut);font-size:22px;white-space:nowrap}
+.sc .tx small{display:block}.sc .pr{margin-top:8px}
+@media(min-width:700px){body{background:var(--line)}header,main{background:var(--bg)}main{box-shadow:0 0 40px rgba(0,0,0,.08)}}
+@media(max-width:560px){main{padding-left:14px;padding-right:14px}}
+</style></head><body>
+<header><button id="bk" class="ib" onclick="tab('cases')" aria-label="Back" style="display:none">←</button><span id="ttl" class="ttl" onclick="tab('home')">⏳ PM Time Machine</span><button class="ib" onclick="th()" aria-label="Toggle theme">◐</button></header>
 <main id="app"></main>
-<nav id="tabs"><div class="in">
-  <button data-t="home" onclick="tab('home')"><span>🏠</span>Home</button>
-  <button data-t="cases" onclick="tab('cases')"><span>📚</span>Cases</button>
-  <button data-t="ins" onclick="tab('ins')"><span>📊</span>Progress</button>
-  <button data-t="about" onclick="tab('about')"><span>ℹ️</span>About</button>
-</div></nav>
+<nav id="tabs" aria-label="Main"><div class="in"><button data-t="home" onclick="tab('home')"><span>🏠</span>Home</button><button data-t="cases" onclick="tab('cases')"><span>📚</span>Cases</button><button data-t="ins" onclick="tab('ins')"><span>📊</span>Progress</button><button data-t="about" onclick="tab('about')"><span>ℹ️</span>About</button></div></nav>
 <script>
-var S={step:"home",sc:0,a:null,b:null,m:[50,50,50],path:[]};
-var SC=[
-  {
-    name:"The Macintosh Launch Crisis", era:"Personal computing era", ic:"💻",
-    r1:{t:"Launch is seven days away", d:"An advanced feature crashes in 15% of test sessions. What do you do?", o:[
-      {k:"A", t:"Ship everything", d:"Preserve scope, accept reliability risk.", e:[-5,-15,10], r:"You hit the date. Crashes start showing up in the field.", alt:"The bold launch makes headlines."},
-      {k:"B", t:"Cut the feature", d:"Protect core experience.", e:[5,10,-5], r:"You ship a stable core. Power users notice what is missing.", alt:"Product ships as a dependable tool."},
-      {k:"C", t:"Delay the launch", d:"Prioritize reliability.", e:[-10,20,0], r:"The product gets fixed, but partners are unhappy.", alt:"Launch slips a season."}
-    ]},
-    r2:{
-      A:{t:"Support tickets are surging", d:"Early buyers report crashes.", o:[{t:"Hotfix sprint", d:"Fix first.", e:[10,15,-10], r:"Team burns out, trust recovers."}]},
-      B:{t:"Power users want the feature", d:"Competitor announced similar.", o:[{t:"Ship in 6 weeks", d:"Plan properly.", e:[10,10,-10], r:"Update lands well."}]},
-      C:{t:"The window is closing", d:"Partners are impatient.", o:[{t:"Limited release", d:"Learn from real use.", e:[10,5,5], r:"Enthusiasts forgive rough edges."}]}
-    }
-  }
+var FEEDBACK_URL="https://forms.gle/AjePQcNBjiTGCqnh8";
+var APP_URL="";
+function lnk(){return APP_URL||(location.protocol.indexOf("http")==0?location.href:"")}
+var M=[["trust","Customer trust"],["quality","Product quality"],["morale","Team morale"]],IC=["🤝","🛠️","💪"];
+function O(k,t,d,e,r,alt){return{k:k,t:t,d:d,e:e,r:r,alt:alt}}
+function P(t,d,e,r){return{t:t,d:d,e:e,r:r}}
+var SC=[{name:"The Macintosh Launch Crisis",era:"Personal computing era",
+r1:{t:"Launch is seven days away",d:"An advanced feature crashes in 15% of test sessions. Engineering needs two weeks to fix it. What do you do?",o:[
+O("A","Ship everything","Preserve scope, accept reliability risk.",[-5,-15,10],"You hit the date and the team celebrates. Early reviews praise the ambition, but crashes start showing up in the field.","The bold launch makes headlines, but the first wave of crashes defines the product’s reputation."),
+O("B","Cut the feature","Protect the core experience, sacrifice functionality.",[5,10,-5],"You ship a stable core. Customers get something that works, though power users notice what is missing.","The product ships as a focused, dependable tool, and the missing feature becomes the community’s top request."),
+O("C","Delay the launch","Prioritize reliability, renegotiate commitments.",[-10,20,0],"The product gets properly fixed, but retail partners and press are unhappy about the slipped date.","The launch slips a season, and the product arrives polished but into a more crowded market.")]},
+r2:{A:{t:"Support tickets are surging",d:"Early buyers report crashes, and a reviewer is about to publish. Your next move?",o:[P("Hotfix sprint and pause marketing","Fix first, talk later.",[10,15,-10],"The team burns out but the fix lands in days. Trust recovers."),P("Blame user setups, keep marketing","Protect the story.",[-20,-5,5],"Reviewers call out the denial. Trust drops further."),P("Free repair program for early buyers","Own the problem publicly.",[15,5,-5],"Customers appreciate the honesty, and costs rise.")]},
+B:{t:"Power users want the missing feature",d:"A competitor just announced something similar. Your next move?",o:[P("Ship the feature in a six-week update","Plan it properly.",[10,10,-10],"The update lands well and reviews improve, with pressure on the team."),P("Position the product as simple by design","Turn the cut into a feature.",[5,0,10],"Casual users like it. Power users stay unconvinced."),P("Rush the feature back in two weeks","Close the gap fast.",[-10,-15,-5],"The crashes come back, and now you have lost trust twice.")]},
+C:{t:"The window is closing",d:"Partners and investors are impatient and a rival is gaining ground. Your next move?",o:[P("Limited release to enthusiasts","Learn from real use.",[10,5,5],"Enthusiasts forgive rough edges and give useful feedback."),P("Negotiate partial shipments with partners","Keep the relationship alive.",[5,0,-5],"Partners stay on board, but the volume is smaller than hoped."),P("Hold until it is perfect","Never ship a flaw.",[-15,10,-10],"The product is excellent, but the market has moved on.")]}}},
+{name:"The First Touchscreen Phone",era:"Early smartphone era",
+r1:{t:"Launch is seven days away",d:"Your flagship live-widgets feature drains the battery in 20% of test sessions. Engineering needs a month to fix it. What do you do?",o:[
+O("A","Ship everything","Keep widgets, accept the battery risk.",[-5,-15,10],"The phone launches on time to excited crowds, but battery complaints appear within days.","The flashy launch wins attention, but battery life becomes the story people tell."),
+O("B","Cut live widgets","Protect battery life, lose the headline feature.",[5,10,-5],"The phone is dependable all day, though reviewers call it less exciting than promised.","The phone becomes known for lasting all day, and developers keep asking for widgets."),
+O("C","Delay the launch","Fix the battery first, reset expectations.",[-10,20,0],"The battery is fixed, but carriers and fans are frustrated by the wait.","The phone arrives later and better, but rivals have already shaped what people expect.")]},
+r2:{A:{t:"Battery complaints go viral",d:"Social media is full of dead-phone photos. Your next move?",o:[P("Push an urgent battery update","Ship the fix, even if rushed.",[10,15,-10],"The update calms the crowd, and the team works nights."),P("Tell users to dim their screens","Deflect the problem.",[-20,-5,5],"The advice gets mocked online and trust takes a hit."),P("Offer free battery replacements","Make customers whole.",[15,5,-5],"Goodwill rises sharply, and so do costs.")]},
+B:{t:"Developers want widgets back",d:"Developers are building for a rival that supports them. Your next move?",o:[P("Ship a safer widget kit in two months","Do it carefully.",[10,10,-10],"Developers return, and the team is stretched."),P("Pitch the phone as calm and focused","Own the simplicity.",[5,0,10],"A loyal niche forms, but growth is slow."),P("Rush widgets back next month","Close the gap fast.",[-10,-15,-5],"Battery problems return and trust erodes.")]},
+C:{t:"Rivals launch first",d:"A competitor ships a similar phone while you polish. Your next move?",o:[P("Run a beta for early adopters","Learn with real users.",[10,5,5],"Early adopters become advocates and sharpen the product."),P("Pre-sell through carrier partners","Lock in distribution.",[5,0,-5],"Carriers commit, but with tougher terms."),P("Hold for a flawless launch","Wait for perfect.",[-15,10,-10],"The product is flawless, and the moment has passed.")]}}},
+MK("The Viral Share Button","Social media era","🔗","Launch is seven days away","Your new share feature drives growth, but a privacy bug exposes drafts in 10% of tests. The fix needs two weeks.",
+[["Ship with the bug","Chase growth, fix it later.","Signups surge, and a few users see strangers' drafts.","Growth explodes, but the privacy story follows the product everywhere."],["Remove the share button","Launch safe and simple.","A smaller launch, but nobody's data is at risk.","A quieter launch builds a reputation as the careful network."],["Delay to fix privacy","Take the two weeks.","The bug is fixed, but your growth window narrows.","The delay costs momentum, but privacy becomes your selling point."]],
+[["Users report exposed drafts","A journalist is asking questions. What now?",[["Patch now and tell users","The patch lands fast and users appreciate being told."],["Say it affects very few users","The claim is picked apart and trust drops."],["Apologize and offer data tools","Users feel respected, though support costs climb."]]],
+["Competitors add sharing","Rival networks grow fast. What now?",[["Build a safe share feature in six weeks","Sharing returns without privacy scares, and the team works hard."],["Promote the product as private by design","Privacy-minded users love it, others drift away."],["Rush sharing back in two weeks","The bug returns and trust takes a second hit."]]],
+["A rival owns the buzz","Press attention moved to a competitor. What now?",[["Invite fans to a private beta","Beta users spread the word and improve the product."],["Partner with creators","Creators join, but on tough terms."],["Wait for a flawless launch","The product is excellent, but the buzz is gone."]]]]),
+MK("The Streaming Switch","Streaming era","🎬","Launch is seven days away","Your company wants to add streaming to its DVD-by-mail service. Servers buckle in 25% of load tests, and scaling takes a month.",
+[["Launch on schedule","Accept buffering risk.","Subscribers join in droves, and some streams stall at peak time.","Fast streaming growth, with reliability as the main complaint."],["Launch a smaller catalog","Fewer titles, steadier service.","Streams are smooth, but browsing feels thin.","A tidy, reliable service, with subscribers asking for more titles."],["Delay the launch","Scale the servers first.","Infrastructure is ready, but competitors announce first.","A late but solid launch into a crowded market."]],
+[["Peak-hour buffering spreads","Weekend streams are stalling. What now?",[["Add capacity and pause promotions","Capacity doubles and buffering fades, with long nights for engineers."],["Blame home internet","Customers see through it and cancellations rise."],["Credit affected subscribers","Credits earn goodwill but cut revenue."]]],
+["Subscribers want more titles","Cancellations mention the small catalog. What now?",[["License titles in stages","Titles arrive steadily and satisfaction rises, with heavy negotiation work."],["Promote curation over quantity","Some love the curated feel, but many want choice."],["Add a huge catalog in two weeks","Quality slips and streams stall again."]]],
+["A rival streams first","Early adopters are trying their service. What now?",[["Open a members-only preview","Members test and praise the service, and give strong feedback."],["Bundle with a device maker","A partner brings reach, but takes a share of revenue."],["Hold until every title is ready","The service is polished, but the moment has passed."]]]]),
+MK("The Late-Night Ride Safety Gap","App economy","🚗","Launch is seven days away","Your ride app enters a new city next week. Driver ID checks fail in 12% of tests, and the fix needs three weeks.",
+[["Launch with the gap","Move fast, patch later.","Rides flow instantly, but safety concerns surface.","Fast city growth, shadowed by safety headlines."],["Launch daytime only","Limit risk, limit reach.","Rides are safe and steady, but late-night users go elsewhere.","A safe, modest launch that earns quiet loyalty."],["Delay the launch","Fix verification first.","ID checks are solid, but local rivals gain ground.","A late but trusted launch that stands out on safety."]],
+[["Safety complaints appear","Local media asks about driver checks. What now?",[["Suspend risky accounts and re-verify","Trust recovers, though driver supply drops."],["Say incidents are rare","The statement backfires and trust falls."],["Refund riders and publish a safety plan","Riders feel protected, and costs rise."]]],
+["Riders ask for night rides","Night demand is booming elsewhere. What now?",[["Add night rides with new checks","Night rides arrive safely, and the team is stretched."],["Promote the safe daytime choice","A loyal daytime base forms, but growth is slow."],["Switch on night rides next week","The ID gap returns and trust drops."]]],
+["A rival launched first","The rival is signing up drivers. What now?",[["Offer drivers early-access bonuses","Drivers join and word spreads."],["Partner with local taxi unions","Unions help, but ask for a cut."],["Wait until every check is perfect","The service is flawless, but the drivers are gone."]]]]),
+MK("The Sponsored Results Dilemma","Early web era","🔍","Launch is seven days away","Investors want revenue and sponsored results are ready. In tests, 18% of users can't tell ads from real results. A redesign needs two weeks.",
+[["Ship ads as built","Revenue now, clarity later.","Revenue starts flowing, but some users feel tricked.","Revenue arrives early, while trust in the results wears down."],["Launch without ads","Keep results clean, forgo revenue.","Users love the clean results, but investors grow nervous.","A clean, loved product with a revenue question hanging over it."],["Delay to redesign labels","Make ads clearly marked.","Ads are clearly labeled, but the revenue target slips.","Honest ad design becomes a long-term strength, after a rocky quarter."]],
+[["Users call ads deceptive","A blog says results are for sale. What now?",[["Relabel ads clearly this week","The fix lands fast and the criticism fades."],["Insist the labels are enough","Critics dig in and trust drops."],["Publish ranking rules and a feedback link","You feel heard, and the team does extra work."]]],
+["Investors want revenue","The board asks for a plan. What now?",[["Pilot labeled ads in two months","A careful pilot earns investor patience."],["Argue for growth first","Some investors accept it, others do not."],["Add heavy ads next month","Revenue jumps and user trust slides."]]],
+["A rival monetizes first","Their revenue is drawing attention. What now?",[["Test labeled ads with a small group","You learn what users accept."],["Sell sponsorships to select partners","A modest income stream appears."],["Hold out for a perfect model","The model is elegant, and late."]]]]),
+MK("The Cloud Outage Week","Cloud era","☁️","Launch is seven days away","A big customer goes live Monday on your cloud platform. Failover breaks in 8% of drills, and the fix needs two weeks.",
+[["Go live as planned","Trust the odds.","The customer launches on time, with a small but real outage risk.","A win on paper, with outage anxiety hanging over every release."],["Limit features at launch","Disable failover-dependent features.","Launch runs smoothly, but the customer wants advanced features.","A steady, limited launch that earns quiet confidence."],["Ask the customer to wait","Fix failover first.","Failover is solid, but the customer is annoyed.","A hard conversation up front builds a reputation for honesty."]],
+[["An outage hits mid-launch","The customer's users are locked out. What now?",[["Roll back and run a postmortem","Service returns quickly and lessons are shared."],["Call it a customer config issue","The customer is furious and trust collapses."],["Credit them and share an incident report","Honesty earns respect, at a financial cost."]]],
+["The customer wants advanced features","They are comparing other clouds. What now?",[["Ship features in stages","Features arrive safely, with a stretched team."],["Explain the safety trade-off","They accept it, but ask for a date."],["Enable everything next week","Failover breaks again."]]],
+["A rival offers an earlier date","The customer is tempted to leave. What now?",[["Offer a pilot on a safe subset","The customer stays and trusts the plan."],["Match their price","They stay, but margins suffer."],["Hold the date no matter what","The platform is solid, but the deal is lost."]]]]),
+MK("The AI Assistant Beta","AI era","🤖","Launch is seven days away","Your AI assistant launches next week. It gives confidently wrong answers in 14% of tests, and better guardrails need three weeks.",
+[["Launch as is","Speed over safeguards.","Excitement is high, but screenshots of wrong answers spread.","Rapid adoption, and a reputation for confident mistakes."],["Limit to low-risk topics","Narrow scope, safer answers.","Answers are reliable, but users hit limits quickly.","A narrow but dependable assistant that expands carefully."],["Delay for guardrails","Add checks before launch.","The assistant is safer, but rivals ship first.","A later, more trustworthy assistant in a noisy market."]],
+[["Wrong answers go viral","A shared example embarrasses the team. What now?",[["Add warnings and tighten results now","Errors drop and the story fades."],["Say users should double-check","The response sounds dismissive and trust falls."],["Publish error rates and a fix plan","Transparency earns credit, and scrutiny."]]],
+["Users want more topics","Requests flood in. What now?",[["Expand one domain at a time","Quality holds as coverage grows."],["Explain why narrow is better","Some understand, others leave."],["Open all topics next week","Wrong answers return in new areas."]]],
+["A rival ships a similar assistant","Press coverage goes to them. What now?",[["Open an invite-only beta","Testers love the reliability and spread the word."],["Integrate into a partner's app","Distribution grows, at a revenue share."],["Hold until nothing goes wrong","The product is safe, but late."]]]])
 ];
-
-function reset(){S={step:"home",sc:0,a:null,b:null,m:[50,50,50],path:[]}}
-function tab(t){S.step=t;draw()}
-function start(i){S.sc=i;S.step="brief";draw()}
-function bars(e){return '<div class="gauges">'+['Customer trust','Product quality','Team morale'].map(function(x,i){var d=e?e[i]:0;return '<div class="g"><div class="mut">'+x+'</div><div class="gv">'+S.m[i]+(d?' <span style="color:'+(d>0?'green':'red')+'">'+(d>0?'+':'')+d+'</span>':'')+'</div><div class="track"><div class="fill" style="width:'+S.m[i]+'%"></div></div></div>'}).join('')+'</div>'}
-function opts(r,fn){return r.o.map(function(o,i){return '<button class="opt" onclick="'+fn+'('+i+')"><i>'+(i+1)+'</i><span><b>'+o.t+'</b><span class="mut">'+o.d+'</span></span></button>'}).join('')}
-
-async function coach(){
-  var el=document.getElementById("ai");
-  if(!el)return;
-  el.innerHTML="Getting a live AI take on your choices...";
-  try{
-    var r=await fetch("/api/chat",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({message:"Review my PM choices. Trust: "+S.m[0], choiceHistory:S})
-    });
-    var j=await r.json();
-    el.innerHTML="<b>Live AI Coach:</b> "+(j.reply||j.text||"Good job!");
-  }catch(e){
-    el.innerHTML="AI Coach is temporarily unavailable.";
-  }
-}
-
-function draw(){
-  var A=document.getElementById("app"),h="",s=S.step,C=SC[S.sc];
-  if(!A)return;
-  
-  if(s=="home"){
-    h='<div class="hero"><h1>Practice real product decisions</h1><p>Play the product manager at a turning point in tech history.</p><button class="go" onclick="start(0)">▶ Play Case Study</button></div>';
-  }else if(s=="cases"){
-    h='<h2>Case Studies</h2><button class="opt" onclick="start(0)"><span><b>The Macintosh Launch Crisis</b><span class="mut">Personal computing era</span></span></button>';
-  }else if(s=="about"){
-    h='<h2>About PM Time Machine</h2><div class="card">A free simulator for learning product management trade-offs.</div>';
-  }else if(s=="ins"){
-    h='<h2>Your Progress</h2><div class="card">Track your decisions and score outcomes here.</div>';
-  }else if(s=="brief"){
-    h='<h2>'+C.name+'</h2><div class="card"><b>Situation:</b> '+C.r1.d+'</div>'+bars()+'<button class="go" onclick="S.step=\'r1\';draw()">Start Decision 1</button>';
-  }else if(s=="r1"){
-    h='<h2>'+C.r1.t+'</h2><p>'+C.r1.d+'</p>'+bars()+opts(C.r1, "pick1");
-  }else if(s=="r1res"){
-    var o=C.r1.o[S.a];
-    h='<h2>Result</h2><div class="card">'+o.r+'</div>'+bars(o.e)+'<button class="go" onclick="S.step=\'r2\';draw()">Next Challenge</button>';
-  }else if(s=="r2"){
-    var r=C.r2[["A","B","C"][S.a]];
-    h='<h2>'+r.t+'</h2><p>'+r.d+'</p>'+bars()+opts(r, "pick2");
-  }else if(s=="r2res"){
-    h='<h2>Scorecard</h2>'+bars()+'<div class="card"><b>Live AI Coaching:</b><button class="go ghost" onclick="coach()">Get AI Feedback</button><p id="ai" style="margin-top:10px"></p></div><button class="go" onclick="tab(\'cases\')">Try Another Case</button>';
-  }
-  A.innerHTML=h;
-}
-
-function pick1(i){S.a=i;var o=SC[S.sc].r1.o[i];S.m=S.m.map(function(v,idx){return Math.max(0,Math.min(100,v+o.e[idx]))});S.path.push(o.t);S.step="r1res";draw()}
-function pick2(i){S.b=i;var r=SC[S.sc].r2[["A","B","C"][S.a]];var o=r.o[i]||r.o[0];S.m=S.m.map(function(v,idx){return Math.max(0,Math.min(100,v+o.e[idx]))});S.path.push(o.t);S.step="r2res";draw()}
-
-draw();
-</script>
-</body>
-</html>
+SC[0].ic="💻";SC[1].ic="📱";
+var PR=["Personal computing era|💻|PixelPad Desktop|home users|drag-and-drop layouts","Personal computing era|💻|DeskWrite Word Processor|writers|live spell-check","Personal computing era|💻|SpreadWise Sheets|accountants|auto-calculation","Personal computing era|💻|ClipArt Studio|designers|layer effects","Personal computing era|💻|LaserPrint Publisher|small businesses|page templates","Personal computing era|💻|FileFlow Manager|office workers|instant search","Personal computing era|💻|HomeLedger Finance|families|bill reminders","Personal computing era|💻|TunePlayer Pro|music fans|smart playlists",
+"Early web era|🌐|WebCrawl Search|searchers|instant suggestions","Early web era|🌐|MailBox Online|email users|inbox search","Early web era|🌐|BidBay Auctions|bargain hunters|live bidding","Early web era|🌐|BookNest Store|readers|one-click ordering","Early web era|🌐|ChatRoom Central|teenagers|private rooms","Early web era|🌐|PageBuilder Sites|small shops|site templates","Early web era|🌐|TravelTrail Booking|travelers|fare alerts","Early web era|🌐|NewsNow Portal|readers|personal front pages",
+"Social media era|💬|FriendFeed Network|members|photo sharing","Social media era|💬|QuickPost Microblog|writers|trending topics","Social media era|💬|PinBoard Ideas|hobbyists|saved boards","Social media era|💬|ClipTok Videos|creators|auto-editing","Social media era|💬|MeetMap Events|neighbors|nearby events","Social media era|💬|GroupGather Chats|communities|group voice rooms","Social media era|💬|StoryStack Reels|storytellers|disappearing stories","Social media era|💬|CareerLink Profiles|job seekers|skill endorsements",
+"Streaming era|🎬|ShowStream Plus|viewers|offline downloads","Streaming era|🎬|TuneCloud Radio|listeners|personalized mixes","Streaming era|🎬|PodCast Hub|podcast fans|auto-play queues","Streaming era|🎬|GameCast Live|gamers|live chat overlays","Streaming era|🎬|KidsView Channel|parents|parental profiles","Streaming era|🎬|ClassicFilm Vault|film buffs|restored classics","Streaming era|🎬|SportsLive Pass|fans|multi-angle replays","Streaming era|🎬|BookTalk Audio|commuters|sleep timers",
+"App economy|📲|RideNow Rides|riders|live driver tracking","App economy|📲|FoodDash Delivery|diners|group orders","App economy|📲|StayHome Rentals|travelers|instant booking","App economy|📲|FitPulse Coach|runners|live route sharing","App economy|📲|PayPocket Wallet|shoppers|one-tap payments","App economy|📲|FixIt Handymen|homeowners|same-day booking","App economy|📲|PetPal Care|pet owners|vet video calls","App economy|📲|LearnLoop Lessons|students|streak rewards",
+"Cloud era|☁️|StoreVault Files|teams|real-time sync","Cloud era|☁️|MeetRoom Video|remote teams|screen sharing","Cloud era|☁️|TaskTrack Projects|managers|automated reports","Cloud era|☁️|ShopStack Commerce|merchants|instant checkout","Cloud era|☁️|DataLake Analytics|analysts|live dashboards","Cloud era|☁️|SignSafe Contracts|legal teams|e-signatures","Cloud era|☁️|HelpDesk Cloud|support agents|smart routing","Cloud era|☁️|CodeShip Pipelines|developers|one-click deploys",
+"AI era|🤖|WriteWell Assistant|writers|tone suggestions","AI era|🤖|DocuSum Summaries|researchers|auto-summaries","AI era|🤖|HealthChat Guide|patients|symptom guidance","AI era|🤖|StudyBuddy Tutor|students|step-by-step hints","AI era|🤖|LegalLens Reader|small businesses|contract flags","AI era|🤖|TripMind Planner|travelers|itinerary drafts","AI era|🤖|CodePilot Helper|developers|code completion","AI era|🤖|ShopSense Stylist|shoppers|outfit suggestions"];
+var TP=[
+{g:"Crash",ls:"When quality and a date collide, name which one you are protecting and tell customers early.",ft:"Reliability versus schedule",t:["{p}: The Launch-Week Crash","{p} launches in seven days. Its {x} feature crashes in {n}% of tests, and engineering needs {w} weeks to fix it.",
+[["Ship everything","Keep the {x} feature, accept the crash risk.","The launch hits its date, but {u} start reporting crashes.","The bold launch earns attention, but reliability defines {p}'s early reputation."],["Cut the {x} feature","Protect stability, lose the feature.","{p} ships stable, though some {u} miss the feature.","A focused, dependable {p} wins steady trust, with {x} the most requested addition."],["Delay the launch","Fix the crashes first.","The crashes are fixed, but partners and press grow impatient.","A late but solid launch, into a market that has moved a little."]],
+[["Crash reports surge","{U} are posting crash reports and a reviewer is about to publish. What now?",[["Hotfix sprint and pause promotion","The fix lands fast and trust recovers, but the team is exhausted."],["Blame {u}' devices","The excuse is mocked and trust falls."],["Offer fixes and credits to early {u}","Goodwill rises, and so do costs."]]],["{U} want the {x} feature back","A rival now offers something similar. What now?",[["Rebuild {x} properly over two months","The feature returns stable, and the team works long hours."],["Position {p} as simple by design","Casual {u} like it, others stay unconvinced."],["Rush {x} back in two weeks","The crashes return and trust takes a second hit."]]],["The window is closing","A rival is gaining ground while you polish. What now?",[["Limited release to enthusiasts","Early fans forgive rough edges and give useful feedback."],["Negotiate staged rollouts with partners","Partners stay on board, but at smaller volume."],["Hold until it is perfect","The product is excellent, but the moment has passed."]]]]]},
+{g:"Privacy",ls:"Trust is slow to earn and fast to lose. A
