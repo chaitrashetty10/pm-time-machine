@@ -18,11 +18,11 @@ Aspiring product managers who want to practice difficult product decisions and u
 
 ## How it works
 
-1. **Pick a case study.** Browse by era or crisis type, search, or tap "Surprise me".
+1. **Pick a case study.** Start with the featured ones on Home, or browse all of them on the Cases tab with search and filters.
 2. **Read the brief.** Role, key tension, and the situation.
 3. **Make two decisions.** Each choice changes three scores from 0 to 100: customer trust, product quality and team morale. No choice is perfect.
 4. **See your scorecard.** Profile, verdict, a recap of your decisions, your alternate timeline, a PM lesson, and the other timelines you did not take.
-5. **Replay.** Try a different path, or another case study. Progress is saved in the browser.
+5. **Ask the coach and replay.** Tap a question to understand your result, then try a different path or another case study. Progress is saved in the browser.
 
 ## What is inside
 
@@ -36,7 +36,7 @@ All scenarios are fictionalized and inspired by tech history. They are not recon
 
 ## Why not just ask ChatGPT?
 
-Curated scenarios, tracked scores, alternate timelines and replay, not open-ended chat. The core game needs no AI. The scorecard coach shows notes written by Claude for each crisis type and decision, and adds a live take from the Claude API when the optional Cloudflare Worker in `cloudflare-worker/` is set up (see `AI_COACH_SETUP.md`). The API key never touches the web page.
+Curated scenarios, tracked scores, alternate timelines and replay, not open-ended chat. The core game needs no AI. The scorecard has an interactive coach: coach notes written by Claude plus four suggested questions that work for everyone. When the optional Cloudflare Worker in `cloudflare-worker/` is set up (see `AI_COACH_SETUP.md`), the coach becomes live and visitors can type their own questions. Keys never touch the web page.
 
 ## Tech
 
