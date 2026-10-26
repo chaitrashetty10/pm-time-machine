@@ -3,7 +3,7 @@
 **Rewrite the decisions that shaped technology.**
 A playable product management simulator. Step into the product manager's chair at a turning point in tech history, make two hard decisions, see the consequences, and replay to explore alternate timelines.
 
-**Live demo:** https://chaitrashetty10.github.io/pm-time-machine/
+**Live demo:** https://pm-time-machine.vercel.app/.
 **Feedback form:** https://forms.gle/AjePQcNBjiTGCqnh8
 
 ## The problem
