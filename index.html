@@ -314,6 +314,822 @@
             ]
           }
         ]
+      },
+      {
+        id: "streaming-switch",
+        tag: "Inspired by · Streaming Era",
+        title: "The Streaming Switch",
+        subtitle: "Launch-week traffic is 4x forecast. Playback stalls on peak evenings.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a streaming service moving from DVD-by-mail to on-demand video.",
+          constraint: "Launch-week traffic is four times the forecast and playback servers are saturating every evening.",
+          stakes: "Content partners require a Monday launch. Missing it costs the catalog deal for the year."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 · Launch Week Capacity",
+            question: "Playback stalls on peak evenings. How do you run launch week?",
+            options: [
+              {
+                id: "A",
+                label: "Open the full catalog to everyone",
+                description: "Give all subscribers the complete library and scale capacity as traffic arrives.",
+                tradeoffTag: "Maximum choice · Playback stalls on peak nights",
+                deltas: { trust: -10, quality: -15, morale: -5 },
+                feedback: "Subscribers loved the library, then complained as buffering spiked every evening."
+              },
+              {
+                id: "B",
+                label: "Cap concurrent streams and lower HD",
+                description: "Limit simultaneous streams per region and default new viewers to standard quality at peak.",
+                tradeoffTag: "Protects playback · Smaller experience at peak",
+                deltas: { trust: +5, quality: +10, morale: +5 },
+                feedback: "Playback held steady at peak. Early users noticed lower quality but stayed for the reliability."
+              },
+              {
+                id: "C",
+                label: "Delay launch to scale servers",
+                description: "Hold the public launch for two weeks while the infrastructure team adds capacity.",
+                tradeoffTag: "Stable service · Breaks the partner launch date",
+                deltas: { trust: -5, quality: +5, morale: -10 },
+                feedback: "Servers scaled cleanly, but partner penalties and the missed Monday launch hit the team hard."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 · Catalog Rebalance",
+            question: "Partners want a deeper catalog next month, and costs are climbing. What do you commit to?",
+            options: [
+              {
+                id: "A",
+                label: "Sign the exclusive deal",
+                description: "Commit to a large exclusive title package to drive subscriptions.",
+                tradeoffTag: "Strong retention · Adds server cost",
+                deltas: { trust: +10, quality: -5, morale: -5 },
+                feedback: "Subscribers stayed for the exclusives, but the extra infrastructure bill put pressure on the team."
+              },
+              {
+                id: "B",
+                label: "Fund an extra content delivery tier",
+                description: "Pay for additional edge capacity so the bigger catalog plays smoothly.",
+                tradeoffTag: "Keeps quality · Eats the budget",
+                deltas: { trust: 0, quality: +10, morale: -10 },
+                feedback: "Playback stayed smooth, but the budget was spent and the team had to cut two planned features."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "ai-assistant-beta",
+        tag: "Inspired by · AI Assistant Era",
+        title: "The AI Assistant Beta",
+        subtitle: "Confident wrong answers appear in 6% of test questions one week before public beta.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a consumer AI assistant preparing for its public beta.",
+          constraint: "The internal red team found confident factual errors in 6% of sampled answers.",
+          stakes: "Beta invitations go out Friday and the press briefing is already booked."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 · Beta Scope",
+            question: "Factual errors are the biggest risk. What ships with the beta?",
+            options: [
+              {
+                id: "A",
+                label: "Ship as planned with a beta label",
+                description: "Keep the Friday invitations and show a beta notice in the interface.",
+                tradeoffTag: "Keeps the schedule · Errors reach real users",
+                deltas: { trust: -15, quality: -10, morale: -5 },
+                feedback: "Early users shared screenshots of wrong answers, and the press coverage focused on the errors."
+              },
+              {
+                id: "B",
+                label: "Restrict beta to low-risk topics",
+                description: "Limit answers to areas where the team can verify facts reliably, and decline the rest.",
+                tradeoffTag: "Safer answers · Narrower product",
+                deltas: { trust: +5, quality: +10, morale: +5 },
+                feedback: "Errors dropped sharply, and testers said the narrower scope felt honest about its limits."
+              },
+              {
+                id: "C",
+                label: "Delay the beta two weeks for grounding",
+                description: "Connect answers to verified sources before any user sees the product.",
+                tradeoffTag: "Reliable answers · Breaks the press plan",
+                deltas: { trust: +5, quality: +10, morale: -15 },
+                feedback: "Quality improved, but the team burned out and the press briefing had to be rescheduled."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 · Sensitive Questions",
+            question: "Beta users ask for medical advice. How does the assistant respond?",
+            options: [
+              {
+                id: "A",
+                label: "Answer fully with a disclaimer",
+                description: "Give detailed medical answers and add a short 'consult a doctor' line.",
+                tradeoffTag: "Maximum helpfulness · Harmful advice risk",
+                deltas: { trust: -10, quality: -5, morale: -5 },
+                feedback: "Some answers were detailed enough to be risky, and the disclaimer did not stop the screenshots."
+              },
+              {
+                id: "B",
+                label: "Decline and point to a professional",
+                description: "Explain the limit and suggest a doctor or licensed resource for medical questions.",
+                tradeoffTag: "Safe default · Frustrates some users",
+                deltas: { trust: +5, quality: +10, morale: 0 },
+                feedback: "Users were annoyed at first, but the safe answers held up under review and the team slept better."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "search-ranking-shift",
+        tag: "Inspired by \u00b7 Search Era",
+        title: "The Search Ranking Shift",
+        subtitle: "A ranking change lifts ad-heavy results, and advertisers push back.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a search engine testing a new ranking model.",
+          constraint: "Tests show ad-heavy pages rising while organic click-through falls 4%.",
+          stakes: "Ad revenue targets for the quarter depend on this launch."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Ranking Rollout",
+            question: "The new model lifts ads but lowers result quality. What do you ship?",
+            options: [
+              {
+                id: "A",
+                label: "Ship the new model globally",
+                description: "Roll the model out to all queries this week.",
+                tradeoffTag: "Revenue up \u00b7 Users notice weaker results",
+                deltas: { trust: -10, quality: -10, morale: +0 },
+                feedback: "Ad revenue rose, but users started trying rival engines within a week."
+              },
+              {
+                id: "B",
+                label: "Roll out to a small share of queries",
+                description: "Test on a small percentage of searches and compare quality.",
+                tradeoffTag: "Learn safely \u00b7 Slower revenue",
+                deltas: { trust: +5, quality: +5, morale: -5 },
+                feedback: "The team learned which queries suffered, and the change shipped in a cleaner form."
+              },
+              {
+                id: "C",
+                label: "Keep the old model and rebalance ads",
+                description: "Revert to the current ranking and cap ad density by hand.",
+                tradeoffTag: "Quality preserved \u00b7 Ads team loses its lift",
+                deltas: { trust: +5, quality: +10, morale: -10 },
+                feedback: "Results stayed trusted, but the ads team felt blocked and missed the quarter."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Advertiser Response",
+            question: "Advertisers say the old ranking hides their pages. How do you respond?",
+            options: [
+              {
+                id: "A",
+                label: "Give top advertisers a ranking boost",
+                description: "Promote paying advertisers in organic results.",
+                tradeoffTag: "Keeps partners \u00b7 Erodes trust in results",
+                deltas: { trust: -15, quality: -5, morale: -5 },
+                feedback: "Advertisers were happy until users noticed that sponsored pages kept winning."
+              },
+              {
+                id: "B",
+                label: "Publish clear ranking rules and labels",
+                description: "Explain how results are ranked and label every ad clearly.",
+                tradeoffTag: "Transparent \u00b7 Slower sales cycle",
+                deltas: { trust: +10, quality: +0, morale: +5 },
+                feedback: "Users trusted the labels, and advertisers accepted the rules after a tense month."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "subscription-price-rise",
+        tag: "Inspired by \u00b7 Subscription Era",
+        title: "The Subscription Price Rise",
+        subtitle: "Licensing costs rose 30%, and the board wants a 20% price increase.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a subscription video service with a loyal base.",
+          constraint: "Churn is already rising among long-term subscribers.",
+          stakes: "Finance needs the price change approved before the next billing cycle."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Pricing Change",
+            question: "How do you raise prices without losing your core subscribers?",
+            options: [
+              {
+                id: "A",
+                label: "Raise prices for everyone next cycle",
+                description: "Apply the new price to all active subscribers at once.",
+                tradeoffTag: "Revenue up \u00b7 Long-term users churn",
+                deltas: { trust: -15, quality: +0, morale: -5 },
+                feedback: "Revenue rose for one month, then cancellations spiked among long-term users."
+              },
+              {
+                id: "B",
+                label: "Grandfather existing subscribers for six months",
+                description: "Keep current prices for loyal users and raise them for new sign-ups.",
+                tradeoffTag: "Protects loyal users \u00b7 Revenue delayed",
+                deltas: { trust: +10, quality: +0, morale: +5 },
+                feedback: "Loyal users stayed, and the team could see clear retention data by the next quarter."
+              },
+              {
+                id: "C",
+                label: "Add a cheaper ad-supported tier",
+                description: "Launch a lower-priced plan with ads and keep the premium price.",
+                tradeoffTag: "Keeps price-sensitive users \u00b7 Cannibalises premium",
+                deltas: { trust: +5, quality: -5, morale: -5 },
+                feedback: "Some premium users downgraded, but total subscriber count grew."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Customer Message",
+            question: "Customers will see the change on their bills. What do you tell them?",
+            options: [
+              {
+                id: "A",
+                label: "Send a short notice with the new price",
+                description: "Email the new price and effective date.",
+                tradeoffTag: "Fast and clear \u00b7 Feels abrupt",
+                deltas: { trust: -5, quality: +0, morale: +0 },
+                feedback: "Customers found the notice clear, but several called support to ask why."
+              },
+              {
+                id: "B",
+                label: "Explain the licensing costs in detail",
+                description: "Publish the cost pressures behind the change and what the money funds.",
+                tradeoffTag: "Honest context \u00b7 Invites debate",
+                deltas: { trust: +10, quality: +0, morale: -5 },
+                feedback: "Most users accepted the explanation, though the comments section got heated."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "feed-algorithm-change",
+        tag: "Inspired by \u00b7 Social Feed Era",
+        title: "The Feed Algorithm Change",
+        subtitle: "Engagement is up, but teens report feeling pressured to post.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a photo-sharing app with a growing teen audience.",
+          constraint: "The new feed favours posts that provoke strong reactions, and engagement is up 18%.",
+          stakes: "The growth team has promised investors a retention jump this quarter."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Feed Ranking",
+            question: "Engagement is up, but reports of pressure are rising. How do you change the feed?",
+            options: [
+              {
+                id: "A",
+                label: "Keep the engagement-first ranking",
+                description: "Leave the current model in place and watch the numbers.",
+                tradeoffTag: "Engagement up \u00b7 Wellbeing reports rise",
+                deltas: { trust: -10, quality: +5, morale: +0 },
+                feedback: "Time spent kept climbing, and so did complaints about feeling judged."
+              },
+              {
+                id: "B",
+                label: "Add a chronological feed option",
+                description: "Let users switch to a simple, time-ordered feed.",
+                tradeoffTag: "User choice \u00b7 Less engagement",
+                deltas: { trust: +10, quality: +5, morale: -5 },
+                feedback: "Users loved having the choice, and engagement dipped for a few weeks."
+              },
+              {
+                id: "C",
+                label: "Hide like counts for under-18s",
+                description: "Remove public like counts from teen accounts.",
+                tradeoffTag: "Reduces pressure \u00b7 Lower time spent",
+                deltas: { trust: +5, quality: +5, morale: -10 },
+                feedback: "Teens reported less pressure, but the growth team lost its best lever."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Teen Accounts",
+            question: "Safety researchers want stronger teen defaults. What do you commit to?",
+            options: [
+              {
+                id: "A",
+                label: "Ship teen defaults with a clear setting",
+                description: "Launch private-by-default accounts with a visible toggle.",
+                tradeoffTag: "Clear control \u00b7 Slower feature launches",
+                deltas: { trust: +10, quality: +5, morale: -10 },
+                feedback: "Parents praised the controls, but the roadmap slipped by a month."
+              },
+              {
+                id: "B",
+                label: "Delay the defaults until next quarter",
+                description: "Keep the current defaults while the team finishes other work.",
+                tradeoffTag: "Keeps roadmap \u00b7 Trust risk",
+                deltas: { trust: -10, quality: -5, morale: +5 },
+                feedback: "The roadmap held, but researchers went public with their concerns."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "cloud-storage-migration",
+        tag: "Inspired by \u00b7 Cloud Era",
+        title: "The Cloud Storage Migration",
+        subtitle: "Moving customer files risks losing sync history for thousands of users.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a file-sync product migrating to a new cloud backend.",
+          constraint: "Two percent of accounts have sync conflicts the new backend cannot yet resolve.",
+          stakes: "The old servers shut down at the end of the month."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Migration Plan",
+            question: "Two percent of accounts are at risk. How do you move them?",
+            options: [
+              {
+                id: "A",
+                label: "Migrate all accounts this weekend",
+                description: "Move every account in one cutover.",
+                tradeoffTag: "Finishes on time \u00b7 Some files may be lost",
+                deltas: { trust: -15, quality: -10, morale: -5 },
+                feedback: "The cutover finished on time, and support spent the next week restoring lost files."
+              },
+              {
+                id: "B",
+                label: "Migrate in waves with rollback",
+                description: "Move accounts in batches, with a tested way to return each one.",
+                tradeoffTag: "Safe recovery \u00b7 Adds two weeks",
+                deltas: { trust: +5, quality: +10, morale: -5 },
+                feedback: "Waves caught the sync bugs early, and rollback saved a few hundred accounts."
+              },
+              {
+                id: "C",
+                label: "Keep affected accounts on old servers",
+                description: "Leave the at-risk accounts where they are until the fix ships.",
+                tradeoffTag: "No data risk \u00b7 Extends old infrastructure",
+                deltas: { trust: +5, quality: +0, morale: -10 },
+                feedback: "No files were lost, but the team had to keep two systems running for months."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Support Load",
+            question: "Support tickets spike after the first wave. How do you staff?",
+            options: [
+              {
+                id: "A",
+                label: "Pull engineers into support shifts",
+                description: "Ask the engineering team to answer tickets directly.",
+                tradeoffTag: "Fast answers \u00b7 Slows the fix backlog",
+                deltas: { trust: +5, quality: -5, morale: -15 },
+                feedback: "Customers got quick answers, but the engineers were exhausted and the backlog grew."
+              },
+              {
+                id: "B",
+                label: "Publish a self-service recovery guide",
+                description: "Write a step-by-step recovery guide and a status page.",
+                tradeoffTag: "Scales support \u00b7 Slower for complex cases",
+                deltas: { trust: +5, quality: +0, morale: +5 },
+                feedback: "Most users fixed their own sync issues, and the hardest cases were escalated cleanly."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "permissions-prompt",
+        tag: "Inspired by \u00b7 Mobile App Era",
+        title: "The Permissions Prompt",
+        subtitle: "Your app asks for location on first launch, and most users say no.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a navigation app launching on mobile.",
+          constraint: "Only 22% of testers grant precise location when asked on first launch.",
+          stakes: "The core route feature does not work without location access."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Onboarding Flow",
+            question: "Most users decline location. How do you ask?",
+            options: [
+              {
+                id: "A",
+                label: "Ask on first launch as planned",
+                description: "Show the system permission prompt immediately.",
+                tradeoffTag: "Simple flow \u00b7 Most users decline",
+                deltas: { trust: -5, quality: -10, morale: +0 },
+                feedback: "The prompt was simple, and most users tapped Don't Allow without a second thought."
+              },
+              {
+                id: "B",
+                label: "Explain the benefit before asking",
+                description: "Show a short screen explaining routes before the permission prompt.",
+                tradeoffTag: "Higher opt-in \u00b7 One more screen",
+                deltas: { trust: +10, quality: +5, morale: +0 },
+                feedback: "Opt-in rose, and users said they understood why the app needed location."
+              },
+              {
+                id: "C",
+                label: "Let users try features first, then ask",
+                description: "Let people search and browse, and ask for location when they request a route.",
+                tradeoffTag: "Earns the request \u00b7 Delays core features",
+                deltas: { trust: +10, quality: +0, morale: -5 },
+                feedback: "Users trusted the app more, but the team had to rebuild onboarding twice."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Declined Users",
+            question: "Users who declined see a blank map. What do they see next?",
+            options: [
+              {
+                id: "A",
+                label: "Show a banner until they grant access",
+                description: "Keep a banner at the top of the screen until location is on.",
+                tradeoffTag: "Persistent reminder \u00b7 Feels nagging",
+                deltas: { trust: -10, quality: +0, morale: -5 },
+                feedback: "Users found the banner annoying, and several uninstalled the app."
+              },
+              {
+                id: "B",
+                label: "Offer manual search without location",
+                description: "Let users enter a start point and get routes without GPS.",
+                tradeoffTag: "Still useful \u00b7 Less accurate routes",
+                deltas: { trust: +5, quality: -5, morale: +5 },
+                feedback: "Users could still plan trips, and the team learned which routes needed live data."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "smart-speaker-privacy",
+        tag: "Inspired by \u00b7 Smart Home Era",
+        title: "The Smart Speaker Wake Word",
+        subtitle: "Recordings from false wake-word triggers are reaching human reviewers.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a smart speaker used in family homes.",
+          constraint: "Human reviewers have heard private conversations captured by accidental triggers.",
+          stakes: "A privacy regulator has asked for a response within 30 days."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Review Policy",
+            question: "Reviewers are hearing private conversations. What do you change?",
+            options: [
+              {
+                id: "A",
+                label: "Keep human review as it is",
+                description: "Continue sampling recordings for human review.",
+                tradeoffTag: "Improves accuracy \u00b7 Privacy concern stays",
+                deltas: { trust: -15, quality: +0, morale: -5 },
+                feedback: "Accuracy stayed high, but the regulator's inquiry made the headlines."
+              },
+              {
+                id: "B",
+                label: "Stop human review of recordings",
+                description: "Use only automated checks on audio, with no human listening.",
+                tradeoffTag: "Privacy protected \u00b7 Accuracy suffers",
+                deltas: { trust: +10, quality: -10, morale: -5 },
+                feedback: "Privacy complaints fell, though false triggers rose for several months."
+              },
+              {
+                id: "C",
+                label: "Review only opted-in recordings",
+                description: "Ask owners before any recording is shared with reviewers.",
+                tradeoffTag: "Consent-based \u00b7 Smaller training data",
+                deltas: { trust: +10, quality: -5, morale: +0 },
+                feedback: "Owners felt in control, and the team had less data but clearer rules."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Default Setting",
+            question: "Most owners never change settings. What is the default?",
+            options: [
+              {
+                id: "A",
+                label: "Keep recordings on by default",
+                description: "Leave voice recording enabled unless owners opt out.",
+                tradeoffTag: "Better product \u00b7 Looks extractive",
+                deltas: { trust: -10, quality: +5, morale: -5 },
+                feedback: "The product improved, but owners who found the default felt misled."
+              },
+              {
+                id: "B",
+                label: "Turn recordings off by default",
+                description: "Require owners to opt in before any recording is kept.",
+                tradeoffTag: "Clear consent \u00b7 Weaker voice features",
+                deltas: { trust: +10, quality: -5, morale: +0 },
+                feedback: "Trust rose, and the voice team had to rebuild features on less data."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "wallet-fraud-spike",
+        tag: "Inspired by \u00b7 Fintech Era",
+        title: "The Digital Wallet Fraud Spike",
+        subtitle: "A new instant-transfer feature sees fraud attempts double within a week.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a mobile wallet launching instant transfers.",
+          constraint: "Fraud losses per transfer are rising, and the fraud team needs a decision by Monday.",
+          stakes: "Instant transfers are the flagship feature of the launch campaign."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Transfer Limits",
+            question: "Fraud attempts doubled. How do you limit the risk?",
+            options: [
+              {
+                id: "A",
+                label: "Keep limits and add a fraud alert",
+                description: "Keep current limits and send an alert for unusual transfers.",
+                tradeoffTag: "Feature stays \u00b7 Losses continue",
+                deltas: { trust: -10, quality: -5, morale: +0 },
+                feedback: "Alerts caught some fraud, but losses kept climbing through the weekend."
+              },
+              {
+                id: "B",
+                label: "Lower transfer limits for new accounts",
+                description: "Cap transfers for accounts younger than 30 days.",
+                tradeoffTag: "Reduces fraud \u00b7 Frustrates new users",
+                deltas: { trust: -5, quality: +10, morale: -5 },
+                feedback: "Fraud dropped sharply, and new users complained about the lower caps."
+              },
+              {
+                id: "C",
+                label: "Pause instant transfers for 48 hours",
+                description: "Turn off the feature while the team reviews the attacks.",
+                tradeoffTag: "Stops losses \u00b7 Breaks the launch campaign",
+                deltas: { trust: -5, quality: +5, morale: -15 },
+                feedback: "Losses stopped, but the campaign went live without its headline feature."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Customer Message",
+            question: "Some customers lost money. What do you say?",
+            options: [
+              {
+                id: "A",
+                label: "Reimburse losses within 24 hours",
+                description: "Refund verified losses quickly and in full.",
+                tradeoffTag: "Protects trust \u00b7 Costs the fraud budget",
+                deltas: { trust: +15, quality: +0, morale: -10 },
+                feedback: "Customers were grateful, and the fraud budget took a hard hit for the quarter."
+              },
+              {
+                id: "B",
+                label: "Explain the new safeguards",
+                description: "Describe the alerts and limits and what customers can do to stay safe.",
+                tradeoffTag: "Transparent \u00b7 Slow to restore trust",
+                deltas: { trust: +5, quality: +0, morale: +5 },
+                feedback: "Customers read the explanation, but several still moved their money elsewhere."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "over-the-air-update",
+        tag: "Inspired by \u00b7 Connected Car Era",
+        title: "The Over-the-Air Update",
+        subtitle: "A software update fixes a brake warning but disables a camera for some cars.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for an electric car's software platform.",
+          constraint: "The update fixes a brake warning, but one in fifty cars loses its reversing camera.",
+          stakes: "Regulators require a recall plan within two weeks if the safety issue is confirmed."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Update Release",
+            question: "The brake fix is critical, but the camera regression is real. What do you push?",
+            options: [
+              {
+                id: "A",
+                label: "Push the full update to every car",
+                description: "Send the brake fix and the camera change to the whole fleet.",
+                tradeoffTag: "Brake fix reaches all cars \u00b7 Camera lost for some",
+                deltas: { trust: -10, quality: -10, morale: -5 },
+                feedback: "The brake fix shipped on time, and camera-loss reports arrived within 48 hours."
+              },
+              {
+                id: "B",
+                label: "Push to cars without the regression",
+                description: "Target only vehicles where the camera change does not apply.",
+                tradeoffTag: "Safe rollout \u00b7 Brake fix delayed for some",
+                deltas: { trust: +5, quality: +5, morale: -5 },
+                feedback: "The rollout was clean, and the brake fix reached most owners within a week."
+              },
+              {
+                id: "C",
+                label: "Hold the update and warn owners",
+                description: "Pause the release and send a safety notice to all owners.",
+                tradeoffTag: "No new risk \u00b7 Brake warning stays",
+                deltas: { trust: -15, quality: -10, morale: +0 },
+                feedback: "No new faults appeared, but owners with the brake warning were left waiting."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Owner Communication",
+            question: "Owners want to know what changed. How do you communicate?",
+            options: [
+              {
+                id: "A",
+                label: "Send a notice after the update",
+                description: "Tell owners what changed once the update is installed.",
+                tradeoffTag: "Quick notice \u00b7 Some owners feel surprised",
+                deltas: { trust: -5, quality: +0, morale: +0 },
+                feedback: "Owners read the notice, but several felt they had not been asked first."
+              },
+              {
+                id: "B",
+                label: "Notify owners before any change",
+                description: "Explain each change and let owners choose when to install.",
+                tradeoffTag: "Full transparency \u00b7 Slower rollout",
+                deltas: { trust: +10, quality: +0, morale: -5 },
+                feedback: "Owners trusted the process, and the rollout took longer than planned."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "video-call-quality",
+        tag: "Inspired by \u00b7 Remote Work Era",
+        title: "The Video Call Quality Drop",
+        subtitle: "Bandwidth drops on video calls, and users blame the app, not their networks.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a video meeting app used by distributed teams.",
+          constraint: "Calls freeze on low bandwidth, and a new 4K option is about to launch.",
+          stakes: "Enterprise customers expect the 4K launch in their renewal contracts."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Launch Scope",
+            question: "The 4K option will strain weak connections. What do you launch?",
+            options: [
+              {
+                id: "A",
+                label: "Launch 4K for everyone",
+                description: "Make 4K available on all plans at launch.",
+                tradeoffTag: "Headline feature \u00b7 Freezes on weak networks",
+                deltas: { trust: -10, quality: -10, morale: -5 },
+                feedback: "4K launched to praise, then the freezing reports flooded support."
+              },
+              {
+                id: "B",
+                label: "Launch 4K with automatic fallback",
+                description: "Drop to lower quality automatically when the connection weakens.",
+                tradeoffTag: "Smooth calls \u00b7 Extra engineering work",
+                deltas: { trust: +10, quality: +10, morale: -10 },
+                feedback: "Calls stayed smooth, but the team rebuilt the adaptive engine under pressure."
+              },
+              {
+                id: "C",
+                label: "Delay 4K and fix the audio stack",
+                description: "Focus the release on reliable audio and stable connections.",
+                tradeoffTag: "Reliable base \u00b7 Misses renewals",
+                deltas: { trust: -5, quality: +10, morale: -5 },
+                feedback: "Calls got more reliable, but two renewal conversations became difficult."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Enterprise Commitment",
+            question: "A key customer asks for a 4K guarantee in writing. How do you respond?",
+            options: [
+              {
+                id: "A",
+                label: "Promise 4K on all plans",
+                description: "Put a 4K guarantee for every seat in the contract.",
+                tradeoffTag: "Keeps the deal \u00b7 Hard to deliver",
+                deltas: { trust: +5, quality: -10, morale: -10 },
+                feedback: "The contract was signed, and the team scrambled to meet the guarantee."
+              },
+              {
+                id: "B",
+                label: "Offer 4K on enterprise plans with fallback",
+                description: "Guarantee 4K where networks allow, with automatic fallback elsewhere.",
+                tradeoffTag: "Honest commitment \u00b7 Smaller promise",
+                deltas: { trust: +10, quality: +0, morale: -5 },
+                feedback: "The customer accepted the terms, and the promise was easier to keep."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "seller-ratings-overhaul",
+        tag: "Inspired by \u00b7 Marketplace Era",
+        title: "The Seller Ratings Overhaul",
+        subtitle: "A new rating system is live, and top sellers say it punishes small mistakes.",
+        duration: "~2.5 mins · 2 Decisions",
+        brief: {
+          context: "You are the PM for a marketplace connecting buyers with independent sellers.",
+          constraint: "Sellers with one bad review fall out of search, and sales dropped 12% for small shops.",
+          stakes: "The board wants buyer ratings to rise before the holiday season."
+        },
+        steps: [
+          {
+            stepNumber: 1,
+            prompt: "Decision 1 of 2 \u00b7 Ratings Rules",
+            question: "Small sellers are leaving. How do you adjust the rating system?",
+            options: [
+              {
+                id: "A",
+                label: "Keep the rules and ask sellers to adapt",
+                description: "Explain the rules and leave the ranking unchanged.",
+                tradeoffTag: "Clear standards \u00b7 Small sellers leave",
+                deltas: { trust: -5, quality: +5, morale: -15 },
+                feedback: "The standards were clear, but several small shops closed their listings."
+              },
+              {
+                id: "B",
+                label: "Weight recent orders above old reviews",
+                description: "Let recent performance count more than reviews from years ago.",
+                tradeoffTag: "Fairer ratings \u00b7 Harder to explain",
+                deltas: { trust: +5, quality: +10, morale: +5 },
+                feedback: "Sellers felt the system was fairer, though the rules took a while to explain."
+              },
+              {
+                id: "C",
+                label: "Remove one-star reviews from search",
+                description: "Hide single one-star reviews from the search ranking.",
+                tradeoffTag: "Protects sellers \u00b7 Buyers lose signal",
+                deltas: { trust: -15, quality: -10, morale: +5 },
+                feedback: "Sellers stopped complaining, but buyers said the ratings no longer meant much."
+              }
+            ]
+          },
+          {
+            stepNumber: 2,
+            prompt: "Decision 2 of 2 \u00b7 Holiday Support",
+            question: "Sellers want help before the holidays. What do you offer?",
+            options: [
+              {
+                id: "A",
+                label: "Waive fees for small sellers",
+                description: "Remove platform fees for sellers below a monthly sales threshold.",
+                tradeoffTag: "Keeps sellers \u00b7 Cuts platform revenue",
+                deltas: { trust: +10, quality: +0, morale: +10 },
+                feedback: "Small sellers stayed through the holidays, and the platform's margin shrank."
+              },
+              {
+                id: "B",
+                label: "Offer a free listing-review service",
+                description: "Review seller listings for clarity and photos before the holidays.",
+                tradeoffTag: "Improves listings \u00b7 Limited capacity",
+                deltas: { trust: +5, quality: +5, morale: -5 },
+                feedback: "Listings improved for the first hundred sellers, then the queue grew."
+              }
+            ]
+          }
+        ]
       }
     ];
 
